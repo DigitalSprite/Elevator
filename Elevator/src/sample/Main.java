@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.Rectangle;
 
 public class Main extends Application {
+    private int Number;
 
     @Override
     public void start(Stage primaryStage) throws Exception{

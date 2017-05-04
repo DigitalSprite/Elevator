@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
  * Created by Stephen on 4/23/2017.
  */
 public class Elevator_Thread extends Controller implements Runnable{
-    private int Elevator_Id;
+    private final int Elevator_Id;
     public int Moving_Direction;    //0 for still, 1 for up, 2 for down
 
     Elevator_Thread(int elevator_Id){
@@ -31,6 +31,13 @@ public class Elevator_Thread extends Controller implements Runnable{
                     Up_Call[Elevator_Id].remove(0);
                 }
                 while(!Down_Call[Elevator_Id].isEmpty()){
+                    if(!Down_Call[Elevator_Id].isEmpty() && Current_floor[Elevator_Id] < Down_Call[Elevator_Id].get(0)){
+                        while(Current_floor[Elevator_Id] < Down_Call[Elevator_Id].get(0)){
+                            Move_Up();
+                        }
+                        Stop_Moving();
+                        Down_Call[Elevator_Id].remove(0);
+                    }
                     while(Current_floor[Elevator_Id] != Down_Call[Elevator_Id].get(0)){
                         Move_Down();
                     }
